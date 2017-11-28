@@ -1,1 +1,1 @@
-# proposal_pacman_in_c
+# Proposal Pac-Man in c
