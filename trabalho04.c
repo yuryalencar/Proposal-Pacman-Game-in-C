@@ -22,10 +22,11 @@ char menu(){
 
 void imprimir_matriz(char matriz [LINHAS][COLUNAS]) {
 
+	int i, j;
 	printf("     ## PAC-MAN ##\n\n");
 
-	for (int i = 0; i < LINHAS; i++) {
-		for (int j = 0; j < COLUNAS; j++) {
+	for (i = 0; i < LINHAS; i++) {
+		for (j = 0; j < COLUNAS; j++) {
 			printf("%c ", matriz[i][j]);
 		}
 		printf("\n");
@@ -34,10 +35,10 @@ void imprimir_matriz(char matriz [LINHAS][COLUNAS]) {
 }
 
 int calcular_resultado(char matriz[LINHAS][COLUNAS]) {
-	int quantidade_alimento = 0;
+	int i, j, quantidade_alimento = 0;
 
-	for (int i = 0; i < LINHAS; i++) {
-		for (int j = 0; j < COLUNAS; j++) {
+	for (i = 0; i < LINHAS; i++) {
+		for (j = 0; j < COLUNAS; j++) {
 			if (matriz[i][j] == '#') {
 				quantidade_alimento++;
 			}
@@ -48,11 +49,11 @@ int calcular_resultado(char matriz[LINHAS][COLUNAS]) {
 }
 
 void iniciar_matriz(char matriz [][COLUNAS], int posicao_pac [2]) {
-	int posicao_item_linha, posicao_item_coluna;
+	int i, j, posicao_item_linha, posicao_item_coluna;
 	
 	// inicializando toda a matriz com posicoes vazias
-	for (int i = 0; i < LINHAS; i++) {
-		for (int j = 0; j < COLUNAS; j++) {
+	for (i = 0; i < LINHAS; i++) {
+		for (j = 0; j < COLUNAS; j++) {
 			matriz[i][j] = '.';
 		}
 	}
@@ -64,7 +65,7 @@ void iniciar_matriz(char matriz [][COLUNAS], int posicao_pac [2]) {
 	matriz[posicao_pac[0]][posicao_pac[1]] = '0';
 
 	// escolhendo locais vazios para inserir os demais itens
-	for (int i = 0; i < LINHAS; i++) {
+	for (i = 0; i < LINHAS; i++) {
 		do {
 			posicao_item_linha = rand() % LINHAS;
 			posicao_item_coluna = rand() % COLUNAS;
@@ -124,7 +125,7 @@ void main() {
 	char opcao;
 	char matriz[LINHAS][COLUNAS];
 	int posicao_pac[2];
-	int quantidade_restante_movimentos = ceil((LINHAS * COLUNAS) / 2), alimentos_existentes = LINHAS;
+	int quantidade_restante_movimentos = floor((LINHAS * COLUNAS) / 2.0), alimentos_existentes = LINHAS;
 	int quantidade_movimentos;
 
 	iniciar_matriz(matriz, posicao_pac);
@@ -140,7 +141,7 @@ void main() {
 	system("cls");
 	imprimir_matriz(matriz);
 	if (alimentos_existentes == LINHAS) {
-		quantidade_movimentos = ceil((LINHAS * COLUNAS) / 2) - quantidade_restante_movimentos;
+		quantidade_movimentos = floor((LINHAS * COLUNAS) / 2.0) - quantidade_restante_movimentos;
 		printf("\nParabens voce venceu, com %d movimentos !\n", quantidade_movimentos);
 	} else {
 		printf("\nInfelizmente voce perdeu, acabaram seus movimentos !\n");
